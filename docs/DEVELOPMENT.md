@@ -24,6 +24,9 @@
    # 安装 Node.js 18 (推荐)
    nvm install 18
    nvm use 18
+   
+   # 设置为默认版本（推荐）
+   nvm alias default 18
    ```
 
 2. **包管理器 / Package Manager**

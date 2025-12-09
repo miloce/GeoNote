@@ -43,8 +43,8 @@
 
 1. **Fork 仓库**
    ```bash
-   # 在 GitHub 上 Fork 仓库
-   # 然后克隆到本地
+   # 在 GitHub 上点击 Fork 按钮创建您的副本
+   # 然后克隆到本地（将 YOUR_USERNAME 替换为您的 GitHub 用户名）
    git clone https://github.com/YOUR_USERNAME/GeoNote.git
    cd GeoNote
    ```

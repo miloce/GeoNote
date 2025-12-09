@@ -208,7 +208,7 @@ Welcome to the GeoNote Documentation Center! Here you'll find everything you nee
 
 当前文档版本对应项目版本：**v0.1.0-dev**
 
-文档最后更新：**2025-12-09**
+文档创建日期：**2025-12-09**
 
 ---
 

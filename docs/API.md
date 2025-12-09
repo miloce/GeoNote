@@ -483,10 +483,10 @@ notes = client.notes.list(page=1, limit=20)
 
 ## 更新日志 / Changelog
 
-### v1.0.0 (计划中)
-- 初始 API 发布
-- 基础 CRUD 操作
-- 地理位置服务
+### v0.1.0 (开发中)
+- 初始 API 设计
+- 基础 CRUD 操作接口定义
+- 地理位置服务接口规划
 
 ---
 

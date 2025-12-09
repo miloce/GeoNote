@@ -74,7 +74,12 @@ sudo apt update && sudo apt upgrade -y
 sudo apt install -y curl git build-essential
 
 # 安装 Node.js (使用 nvm)
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+# 注意：建议先下载脚本并检查内容再执行
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh > install-nvm.sh
+# 检查脚本内容
+cat install-nvm.sh
+# 确认无误后执行
+bash install-nvm.sh
 source ~/.bashrc
 nvm install 18
 nvm use 18

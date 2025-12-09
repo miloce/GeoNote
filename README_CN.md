@@ -4,8 +4,6 @@
 
 **用地图记录生活，让回忆有迹可循**
 
-*Record your life with maps, make memories traceable*
-
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
@@ -15,7 +13,7 @@
 
 ---
 
-## 📖 目录 (Table of Contents)
+## 📖 目录
 
 - [项目简介](#项目简介)
 - [核心特性](#核心特性)

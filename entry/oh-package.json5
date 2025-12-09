@@ -1,0 +1,15 @@
+{
+  "name": "entry",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "",
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "@amap/amap_lbs_common": ">=1.2.2",
+    "@amap/amap_lbs_location": ">=1.2.3",
+    "@amap/amap_lbs_map3d": ">=2.2.3",
+    "@amap/amap_lbs_search": ">=1.0.1"
+  }
+}
+

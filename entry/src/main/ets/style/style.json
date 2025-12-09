@@ -1,0 +1,37 @@
+{
+  "linearGradient": [],
+  "radialGradient": [],
+  "sweepGradient": [],
+  "solid": [
+    {
+      "name": "Lightfgcolorunchecked111523",
+      "value": "#33FFFFFF"
+    },
+    {
+      "name": "Lightinteractivefocus111522",
+      "value": "#0A59F7"
+    },
+    {
+      "name": "Lighticontertiary111521",
+      "value": "#66000000"
+    },
+    {
+      "name": "Lightcompbackgroundtertiary111520",
+      "value": "#0C000000"
+    },
+    {
+      "name": "Lightcompbackgroundprimarycontrary111519",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "Lightcompbackgroundemphasize111518",
+      "value": "#0A59F7"
+    },
+    {
+      "name": "Lightinteractivehover111458",
+      "value": "#0C000000"
+    }
+  ],
+  "dropShadow": [],
+  "text": []
+}

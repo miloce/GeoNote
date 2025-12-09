@@ -1,0 +1,21 @@
+{
+  "src": [
+    "pages/Splash",
+    "pages/Index",
+    "pages/Login",
+    "pages/Register",
+    "pages/Profile",
+    "pages/Feedback",
+    "pages/DiaryFootprint",
+    "pages/DiaryFootprintMap",
+    "pages/DiaryEdit",
+    "pages/BindEmail",
+    "pages/ForgotPassword",
+    "pages/ChangePassword",
+    "pages/ChangeUsername",
+    "pages/Settings",
+    "pages/MapDiaryDetail",
+    "pages/PrivacyPolicy",
+    "pages/UserAgreement"
+  ]
+}

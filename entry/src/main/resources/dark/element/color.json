@@ -1,0 +1,76 @@
+{
+  "color": [
+    {
+      "name": "start_window_background",
+      "value": "#0D1A26"
+    },
+    {
+      "name": "page_background",
+      "value": "#0D1A26"
+    },
+    {
+      "name": "card_background",
+      "value": "#1E2A38"
+    },
+    {
+      "name": "text_primary",
+      "value": "#F5F7FA"
+    },
+    {
+      "name": "text_link",
+      "value": "#6AA9FF"
+    },
+    {
+      "name": "button_primary_bg",
+      "value": "#6AA9FF"
+    },
+    {
+      "name": "button_primary_text",
+      "value": "#0D1A26"
+    },
+    {
+      "name": "text_muted",
+      "value": "#B0B5D1"
+    },
+    {
+      "name": "divider",
+      "value": "#4C5A73"
+    },
+    {
+      "name": "text_inverse",
+      "value": "#0D1A26"
+    },
+    {
+      "name": "auth_page_background",
+      "value": "#0D1A26"
+    },
+    {
+      "name": "auth_card_background",
+      "value": "#1E2A38"
+    },
+    {
+      "name": "auth_button_bg",
+      "value": "#6AA9FF"
+    },
+    {
+      "name": "auth_button_text",
+      "value": "#0D1A26"
+    },
+    {
+      "name": "footprint_card_gradient_start",
+      "value": "#1E3A5F"
+    },
+    {
+      "name": "footprint_card_gradient_end",
+      "value": "#0D1A26"
+    },
+    {
+      "name": "footprint_card_decoration",
+      "value": "#6AA9FF"
+    },
+    {
+      "name": "footprint_card_shadow",
+      "value": "#66000000"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "app": {
+    "signingConfigs": [
+      {
+        "name": "default",
+        "type": "HarmonyOS",
+        "material": {
+          "storeFile": "./cer/geonote@app.p12",
+          "storePassword": "0000001B5ECCE907E8D71AD0DFACDBC7EFEDF728666C299EC45A20F54A9386ED233A9F13ABBA4A7B3F722C",
+          "keyAlias": "geonote",
+          "keyPassword": "0000001B36C9E5D5CA3876EBFE8DB6213EAC7785A522404D615C51B896D85854E5C76317F350811FA61356",
+          "signAlg": "SHA256withECDSA",
+          "profile": "./cer/geonoteappRelease.p7b",
+          "certpath": "./cer/geonoteapp.cer"
+        }
+      }
+    ],
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+        "targetSdkVersion": "6.0.0(20)",
+        "compatibleSdkVersion": "6.0.0(20)",
+        "runtimeOS": "HarmonyOS",
+        "buildOption": {
+          "strictMode": {
+            "caseSensitiveCheck": true,
+            "useNormalizedOHMUrl": true
+          }
+        }
+      }
+    ],
+    "buildModeSet": [
+      {
+        "name": "debug",
+      },
+      {
+        "name": "release"
+      }
+    ]
+  },
+  "modules": [
+    {
+      "name": "entry",
+      "srcPath": "./entry",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    }
+  ]
+}

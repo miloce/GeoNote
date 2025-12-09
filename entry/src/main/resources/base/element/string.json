@@ -1,0 +1,20 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "迹记"
+    },
+    {
+      "name": "Harmony_location_permission_reason",
+      "value": "需要位置权限来记录地理笔记"
+    }
+  ]
+}

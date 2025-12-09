@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 💬 讨论 / Discussions
+    url: https://github.com/miloce/GeoNote/discussions
+    about: 如果您有问题或想法，欢迎在讨论区交流 / Ask questions and discuss ideas
+  - name: 📚 文档 / Documentation
+    url: https://github.com/miloce/GeoNote/blob/main/README.md
+    about: 查看项目文档 / View project documentation

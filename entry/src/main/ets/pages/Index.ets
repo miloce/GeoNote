@@ -101,6 +101,7 @@ export struct Index {
   // 地图相关
   private cardMapViews: Map<string, MapView> = new Map()
   private cardAMaps: Map<string, AMap> = new Map()
+  @State privacyAgreed: boolean = false
 
   async aboutToAppear() {
     // 注册断点监听
@@ -131,12 +132,11 @@ export struct Index {
       console.log('[Index] 当前用户ID:', this.currentUserId);
     }
 
-    // 初始化定位管理器
-    const context = getContext(this) as common.UIAbilityContext;
-    this.locationManager = LocationManager.getInstance(context);
-
-    // 自动获取定位（静默）
-    this.autoGetLocation();
+    // 记录隐私同意状态（用于控制后续权限申请）
+    this.privacyAgreed = await UserStorage.isPrivacyAgreed();
+    if (!this.privacyAgreed) {
+      console.info('[Index] 用户未同意隐私政策，定位相关流程将延后至弹窗中触发');
+    }
 
     await this.loadDiaries();
     await this.syncDiaries();
@@ -537,6 +537,12 @@ export struct Index {
           animateTo({ duration: 300, curve: Curve.EaseOut }, () => {
             this.addDiaryDialogOffset = 0;
             this.addDiaryMaskOpacity = 1;
+          });
+          // 用户主动打开记录弹窗后，再触发定位/权限申请
+          this.ensureLocationReady().then((ready) => {
+            if (ready) {
+              this.autoGetLocation();
+            }
           });
         })
 
@@ -1591,9 +1597,37 @@ export struct Index {
   }
 
   /**
+   * 确保定位能力仅在用户同意隐私且主动触发时初始化/申请
+   */
+  async ensureLocationReady(): Promise<boolean> {
+    if (!this.privacyAgreed) {
+      promptAction.showToast({ message: '请先同意隐私政策后再定位' });
+      return false;
+    }
+
+    if (!this.locationManager) {
+      const context = getContext(this) as common.UIAbilityContext;
+      this.locationManager = LocationManager.getInstance(context);
+    }
+
+    return true;
+  }
+
+  /**
    * 自动获取定位（静默，无提示）
    */
   async autoGetLocation() {
+    if (!this.privacyAgreed) {
+      console.warn('[Index] 未同意隐私政策，禁止自动定位');
+      return;
+    }
+
+    // 确保定位管理器已初始化
+    if (!this.locationManager) {
+      const context = getContext(this) as common.UIAbilityContext;
+      this.locationManager = LocationManager.getInstance(context);
+    }
+
     if (this.isGettingLocation) {
       return;
     }
@@ -1638,6 +1672,10 @@ export struct Index {
    * 手动获取当前位置（点击定位按钮）
    */
   async handleGetLocation() {
+    if (!(await this.ensureLocationReady())) {
+      return;
+    }
+
     if (this.isGettingLocation) {
       return;
     }

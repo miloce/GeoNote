@@ -76,6 +76,29 @@ export struct BindEmail {
     }
   }
 
+  getHeroHeight(): number {
+    const base = (() => {
+      switch (this.currentBreakpoint) {
+        case 'xs': return 220;
+        case 'sm': return 260;
+        case 'md': return 300;
+        case 'lg': return 340;
+        default: return 260;
+      }
+    })();
+    return this.isLandscape ? Math.max(180, base * 0.75) : base;
+  }
+
+  getDecorScale(): number {
+    switch (this.currentBreakpoint) {
+      case 'xs': return 0.7;
+      case 'sm': return 1.0;
+      case 'md': return 1.15;
+      case 'lg': return 1.25;
+      default: return 1.0;
+    }
+  }
+
   getSpacing(): number {
     switch (this.currentBreakpoint) {
       case 'xs': return 16;
@@ -87,240 +110,252 @@ export struct BindEmail {
   }
 
   build() {
-    Scroll(this.scrollController) {
-      Column() {
-        // 顶部装饰区域
-        Stack() {
-          // 背景装饰图片
-          Row()
-            .width('100%')
-            .height('100%')
-            .backgroundImageSize(ImageSize.Cover)
-            .backgroundImage($r('app.media.737d3651ee89ae5c280ba9bbc4474908293f40cb'))
-
-          // 右上角装饰
-          Row()
-            .height(this.currentBreakpoint === 'lg' ? 140 : 128)
-            .width(this.currentBreakpoint === 'lg' ? 140 : 128)
-            .backgroundImageSize(ImageSize.FILL)
-            .backgroundImage($r('app.media.5eb645d0ae29e233553fc27fcc9f9c1d008116a6'))
-            .position({ right: 0, top: 30 })
-
-          // 左上角装饰
-          Row()
-            .height(64)
-            .width(64)
-            .backgroundImageSize(ImageSize.FILL)
-            .backgroundImage($r('app.media.c5f56c2ed4e69c5262ba581aa283ab48698fce41'))
-            .position({ left: 36, top: 55 })
-
-          // 左下角装饰
-          Row()
-            .height(172)
-            .width(172)
-            .backgroundImageSize(ImageSize.FILL)
-            .backgroundImage($r('app.media.485fbf0d864cc2b6e79ee9fe0ecd0d96b1ad5297'))
-            .position({ left: -66, bottom: 0 })
-        }
+    Stack() {
+      // 全屏背景填充，避免上下出现白边
+      Row()
         .width('100%')
-        .height(this.isLandscape ? 180 : 280)
+        .height('100%')
+        .backgroundColor(ColorTheme.getColor('authPageBackground'))
 
-        // 主卡片区域
+      Scroll(this.scrollController) {
         Column() {
-          // 标题
-          Text('绑定邮箱')
-            .fontColor(ColorTheme.getColor('textPrimary'))
-            .fontWeight(FontWeight.Bold)
-            .fontSize(this.getFontSize(32))
-            .textAlign(TextAlign.Center)
-            .margin({ top: this.getSpacing() + 20, bottom: 12 })
+          // 顶部装饰区域
+          Stack() {
+            // 背景装饰图片
+            Row()
+              .width('100%')
+              .height('100%')
+              .backgroundImageSize(ImageSize.Cover)
+              .backgroundImage($r('app.media.737d3651ee89ae5c280ba9bbc4474908293f40cb'))
 
-          // 提示文字
-          Text('请绑定邮箱以完善账号信息')
-            .fontColor(ColorTheme.getColor('textMuted'))
-            .fontSize(this.getFontSize(14))
-            .textAlign(TextAlign.Center)
-            .margin({ bottom: this.getSpacing() })
+            // 右上角装饰
+            Row()
+              .height(128 * this.getDecorScale())
+              .width(128 * this.getDecorScale())
+              .backgroundImageSize(ImageSize.FILL)
+              .backgroundImage($r('app.media.5eb645d0ae29e233553fc27fcc9f9c1d008116a6'))
+              .position({ right: 0, top: 30 * this.getDecorScale() })
 
-          // 用户名显示卡片
-          Row({ space: 8 }) {
-            Flex({ justifyContent: FlexAlign.Center, alignItems: ItemAlign.Center }) {
-              SymbolGlyph($r('sys.symbol.person_crop_circle_fill_1'))
-                .fontSize(this.getFontSize(20))
-                .fontColor([ColorTheme.getColor('textPrimary')])
-            }
-            .width(32)
-            .height(32)
-            .borderRadius(16)
-            .backgroundColor(ColorTheme.getColor('pageBackground'))
+            // 左上角装饰
+            Row()
+              .height(64 * this.getDecorScale())
+              .width(64 * this.getDecorScale())
+              .backgroundImageSize(ImageSize.FILL)
+              .backgroundImage($r('app.media.c5f56c2ed4e69c5262ba581aa283ab48698fce41'))
+              .position({ left: 36 * this.getDecorScale(), top: 55 * this.getDecorScale() })
 
-            Column({ space: 2 }) {
-              Text('当前用户')
-                .fontColor(ColorTheme.getColor('textMuted'))
-                .fontSize(this.getFontSize(12))
-              Text(this.username)
-                .fontColor(ColorTheme.getColor('textPrimary'))
-                .fontWeight(FontWeight.Medium)
-                .fontSize(this.getFontSize(15))
-            }
-            .alignItems(HorizontalAlign.Start)
+            // 左下角装饰
+            Row()
+              .height(172 * this.getDecorScale())
+              .width(172 * this.getDecorScale())
+              .backgroundImageSize(ImageSize.FILL)
+              .backgroundImage($r('app.media.485fbf0d864cc2b6e79ee9fe0ecd0d96b1ad5297'))
+              .position({ left: -66 * this.getDecorScale(), bottom: 0 })
           }
-          .width(this.getContentWidth())
-          .padding({ left: 16, right: 16, top: 12, bottom: 12 })
-          .borderRadius(16)
-          .backgroundColor(ColorTheme.getColor('pageBackground'))
-          .margin({ bottom: this.getSpacing() })
+          .width('100%')
+          .height(this.getHeroHeight())
 
-          // 邮箱输入框
-          Column({ space: 4 }) {
-            Row() {
+          // 主卡片区域
+          Column() {
+            // 标题
+            Text('绑定邮箱')
+              .fontColor(ColorTheme.getColor('textPrimary'))
+              .fontWeight(FontWeight.Bold)
+              .fontSize(this.getFontSize(32))
+              .textAlign(TextAlign.Center)
+              .margin({ top: this.getSpacing() + 20, bottom: 12 })
+
+            // 提示文字
+            Text('请绑定邮箱以完善账号信息')
+              .fontColor(ColorTheme.getColor('textMuted'))
+              .fontSize(this.getFontSize(14))
+              .textAlign(TextAlign.Center)
+              .margin({ bottom: this.getSpacing() })
+
+            // 用户名显示卡片
+            Row({ space: 8 }) {
               Flex({ justifyContent: FlexAlign.Center, alignItems: ItemAlign.Center }) {
-                SymbolGlyph($r('sys.symbol.envelope_fill'))
+                SymbolGlyph($r('sys.symbol.person_crop_circle_fill_1'))
                   .fontSize(this.getFontSize(20))
                   .fontColor([ColorTheme.getColor('textPrimary')])
               }
               .width(32)
               .height(32)
-              .margin({ left: 20, right: 12 })
+              .borderRadius(16)
+              .backgroundColor(ColorTheme.getColor('pageBackground'))
 
-              TextInput({ placeholder: '请输入邮箱地址', text: $$this.email })
-                .layoutWeight(1)
-                .height(this.currentBreakpoint === 'xs' ? 56 : 65)
-                .backgroundColor(Color.Transparent)
-                .fontColor(ColorTheme.getColor('textPrimary'))
-                .fontSize(this.getFontSize(16))
-                .type(InputType.Email)
-                .placeholderColor(ColorTheme.getColor('textMuted'))
-                .onChange((value: string) => {
-                  this.email = value;
-                  if (value && !this.validateEmail(value)) {
-                    this.emailError = '邮箱格式不正确';
-                  } else {
-                    this.emailError = '';
-                  }
-                })
+              Column({ space: 2 }) {
+                Text('当前用户')
+                  .fontColor(ColorTheme.getColor('textMuted'))
+                  .fontSize(this.getFontSize(12))
+                Text(this.username)
+                  .fontColor(ColorTheme.getColor('textPrimary'))
+                  .fontWeight(FontWeight.Medium)
+                  .fontSize(this.getFontSize(15))
+              }
+              .alignItems(HorizontalAlign.Start)
             }
             .width(this.getContentWidth())
-            .height(this.currentBreakpoint === 'xs' ? 56 : 65)
-            .borderRadius(25)
-            .border({
-              width: this.emailError ? 2 : 0,
-              color: this.emailError ? '#E53E3E' : 'transparent'
-            })
-            .shadow({
-              radius: 20,
-              offsetX: 0,
-              offsetY: 8,
-              fill: false,
-              color: 'rgba(55, 62, 125, 0.1)'
-            })
+            .padding({ left: 16, right: 16, top: 12, bottom: 12 })
+            .borderRadius(16)
             .backgroundColor(ColorTheme.getColor('pageBackground'))
+            .margin({ bottom: this.getSpacing() })
 
-            if (this.emailError) {
-              Text(this.emailError)
-                .fontColor('#E53E3E')
-                .fontSize(this.getFontSize(12))
-                .padding({ left: 20 })
-                .width(this.getContentWidth())
-            }
-          }
-          .margin({ bottom: this.getSpacing() })
+            // 邮箱输入框
+            Column({ space: 4 }) {
+              Row() {
+                Flex({ justifyContent: FlexAlign.Center, alignItems: ItemAlign.Center }) {
+                  SymbolGlyph($r('sys.symbol.envelope_fill'))
+                    .fontSize(this.getFontSize(20))
+                    .fontColor([ColorTheme.getColor('textPrimary')])
+                }
+                .width(32)
+                .height(32)
+                .margin({ left: 20, right: 12 })
 
-          // 按钮区域
-          Row() {
-            // 跳过按钮
-            Row({ space: 4 }) {
-              Text('暂时跳过')
-                .fontColor(ColorTheme.getColor('textMuted'))
-                .fontSize(this.getFontSize(14))
-              Text('→')
-                .fontColor(ColorTheme.getColor('textMuted'))
-                .fontSize(this.getFontSize(14))
-            }
-            .padding({ left: 16, right: 16, top: 8, bottom: 8 })
-            .borderRadius(20)
-            .onClick(() => {
-              if (!this.isBinding) {
-                this.handleSkip();
-              }
-            })
-
-            Blank()
-
-            // 绑定按钮
-            Button() {
-              if (this.isBinding) {
-                LoadingProgress()
-                  .width(24)
-                  .height(24)
-                  .color(ColorTheme.getColor('authButtonText'))
-              } else {
-                Text('绑定邮箱')
-                  .fontColor(ColorTheme.getColor('authButtonText'))
-                  .fontWeight(FontWeight.Bold)
+                TextInput({ placeholder: '请输入邮箱地址', text: $$this.email })
+                  .layoutWeight(1)
+                  .height(this.currentBreakpoint === 'xs' ? 56 : 65)
+                  .backgroundColor(Color.Transparent)
+                  .fontColor(ColorTheme.getColor('textPrimary'))
                   .fontSize(this.getFontSize(16))
+                  .type(InputType.Email)
+                  .placeholderColor(ColorTheme.getColor('textMuted'))
+                  .onChange((value: string) => {
+                    this.email = value;
+                    if (value && !this.validateEmail(value)) {
+                      this.emailError = '邮箱格式不正确';
+                    } else {
+                      this.emailError = '';
+                    }
+                  })
+              }
+              .width(this.getContentWidth())
+              .height(this.currentBreakpoint === 'xs' ? 56 : 65)
+              .borderRadius(25)
+              .border({
+                width: this.emailError ? 2 : 0,
+                color: this.emailError ? '#E53E3E' : 'transparent'
+              })
+              .shadow({
+                radius: 20,
+                offsetX: 0,
+                offsetY: 8,
+                fill: false,
+                color: 'rgba(55, 62, 125, 0.1)'
+              })
+              .backgroundColor(ColorTheme.getColor('pageBackground'))
+
+              if (this.emailError) {
+                Text(this.emailError)
+                  .fontColor('#E53E3E')
+                  .fontSize(this.getFontSize(12))
+                  .padding({ left: 20 })
+                  .width(this.getContentWidth())
               }
             }
-            .width(this.currentBreakpoint === 'xs' ? 130 : 145)
-            .height(this.currentBreakpoint === 'xs' ? 50 : 55)
-            .borderRadius(40)
-            .backgroundColor(ColorTheme.getColor('authButtonBg'))
-            .opacity(this.isBinding || this.emailError ? 0.6 : 1)
-            .shadow({
-              radius: 20,
-              offsetX: 0,
-              offsetY: 8,
-              fill: false,
-              color: 'rgba(25, 28, 50, 0.1)'
-            })
-            .onClick(() => {
-              if (!this.isBinding && !this.emailError) {
-                this.handleBindEmail();
-              }
-            })
-          }
-          .width(this.getContentWidth())
-          .margin({ bottom: this.getSpacing() + 20 })
+            .margin({ bottom: this.getSpacing() })
 
-          // 提示信息
-          Column({ space: 8 }) {
-            Row({ space: 4 }) {
-              SymbolGlyph($r('sys.symbol.exclamationmark_triangle_fill'))
-                .fontSize(this.getFontSize(14))
-                .fontColor([ColorTheme.getColor('textMuted')])
-              Text('绑定邮箱后可用于找回密码')
+            // 按钮区域
+            Row() {
+              // 跳过按钮
+              Row({ space: 4 }) {
+                Text('暂时跳过')
+                  .fontColor(ColorTheme.getColor('textMuted'))
+                  .fontSize(this.getFontSize(14))
+                Text('→')
+                  .fontColor(ColorTheme.getColor('textMuted'))
+                  .fontSize(this.getFontSize(14))
+              }
+              .padding({ left: 16, right: 16, top: 8, bottom: 8 })
+              .borderRadius(20)
+              .onClick(() => {
+                if (!this.isBinding) {
+                  this.handleSkip();
+                }
+              })
+
+              Blank()
+
+              // 绑定按钮
+              Button() {
+                if (this.isBinding) {
+                  LoadingProgress()
+                    .width(24)
+                    .height(24)
+                    .color(ColorTheme.getColor('authButtonText'))
+                } else {
+                  Text('绑定邮箱')
+                    .fontColor(ColorTheme.getColor('authButtonText'))
+                    .fontWeight(FontWeight.Bold)
+                    .fontSize(this.getFontSize(16))
+                }
+              }
+              .width(this.currentBreakpoint === 'xs' ? 130 : 145)
+              .height(this.currentBreakpoint === 'xs' ? 50 : 55)
+              .borderRadius(40)
+              .backgroundColor(ColorTheme.getColor('authButtonBg'))
+              .opacity(this.isBinding || this.emailError ? 0.6 : 1)
+              .shadow({
+                radius: 20,
+                offsetX: 0,
+                offsetY: 8,
+                fill: false,
+                color: 'rgba(25, 28, 50, 0.1)'
+              })
+              .onClick(() => {
+                if (!this.isBinding && !this.emailError) {
+                  this.handleBindEmail();
+                }
+              })
+            }
+            .width(this.getContentWidth())
+            .margin({ bottom: this.getSpacing() + 20 })
+
+            // 提示信息
+            Column({ space: 8 }) {
+              Row({ space: 4 }) {
+                SymbolGlyph($r('sys.symbol.exclamationmark_triangle_fill'))
+                  .fontSize(this.getFontSize(14))
+                  .fontColor([ColorTheme.getColor('textMuted')])
+                Text('绑定邮箱后可用于找回密码')
+                  .fontColor(ColorTheme.getColor('textMuted'))
+                  .fontSize(this.getFontSize(12))
+              }
+              .justifyContent(FlexAlign.Center)
+
+              Text('您的邮箱信息将被安全保护')
                 .fontColor(ColorTheme.getColor('textMuted'))
-                .fontSize(this.getFontSize(12))
+                .fontSize(this.getFontSize(11))
+                .opacity(0.6)
             }
-            .justifyContent(FlexAlign.Center)
-
-            Text('您的邮箱信息将被安全保护')
-              .fontColor(ColorTheme.getColor('textMuted'))
-              .fontSize(this.getFontSize(11))
-              .opacity(0.6)
+            .width(this.getContentWidth())
+            .margin({ bottom: 40 })
           }
           .width(this.getContentWidth())
-          .margin({ bottom: 40 })
+          .borderRadius({ topLeft: 40, topRight: 40 })
+          .backgroundColor(ColorTheme.getColor('authCardBackground'))
+          .alignItems(HorizontalAlign.Center)
+          .margin({ top: -40 })
+          .shadow({
+            radius: 40,
+            offsetX: 0,
+            offsetY: -10,
+            fill: false,
+            color: 'rgba(55, 62, 125, 0.05)'
+          })
         }
         .width('100%')
-        .borderRadius({ topLeft: 40, topRight: 40 })
-        .backgroundColor(ColorTheme.getColor('authCardBackground'))
-        .alignItems(HorizontalAlign.Center)
-        .margin({ top: -40 })
-        .shadow({
-          radius: 40,
-          offsetX: 0,
-          offsetY: -10,
-          fill: false,
-          color: 'rgba(55, 62, 125, 0.05)'
-        })
+        .constraintSize({ minHeight: '100%' })
+        .backgroundColor(ColorTheme.getColor('authPageBackground'))
       }
       .width('100%')
-      .backgroundColor(ColorTheme.getColor('authPageBackground'))
+      .height('100%')
+      .scrollBar(BarState.Off)
     }
     .width('100%')
     .height('100%')
-    .scrollBar(BarState.Off)
+    .backgroundColor(ColorTheme.getColor('authPageBackground'))
   }
 
   /**

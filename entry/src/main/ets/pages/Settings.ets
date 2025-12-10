@@ -195,7 +195,7 @@ export struct Settings {
               Divider().color(ColorTheme.getColor('divider')).margin({ left: 48 })
               this.buildActionRow('用户协议', 'sys.symbol.doc_text', () => this.handleUserAgreement())
               Divider().color(ColorTheme.getColor('divider')).margin({ left: 48 })
-              this.buildInfoRow('当前版本', 'sys.symbol.app_badge', 'v1.0.0')
+              this.buildInfoRow('当前版本', 'sys.symbol.app_badge', 'v1.0')
             }
             .width(this.getContentWidth())
             .backgroundColor(ColorTheme.getColor('cardBackground'))
@@ -377,7 +377,7 @@ export struct Settings {
     try {
       promptAction.showDialog({
         title: '关于迹记',
-        message: '迹记（GeoNote）是一款基于地理位置的日记应用\n\n版本：v1.0.0\n\n© 2025 迹记团队',
+        message: '迹记（GeoNote）是一款基于地理位置的日记应用\n\n版本：v1.0\n\n© 2025 迹记团队',
         buttons: [
           { text: '确定', color: ColorTheme.getColor('buttonPrimaryBg') } as promptAction.Button
         ]

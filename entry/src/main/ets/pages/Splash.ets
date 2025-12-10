@@ -379,7 +379,7 @@ export struct Splash {
   @Builder
   buildVersionInfo() {
     Column({ space: 4 }) {
-      Text('Version 1.0.0')
+      Text('Version 1.0')
         .fontSize(this.currentBreakpoint === 'xs' ? 10 : 12)
         .fontColor(ColorTheme.getColor('textMuted'))
         .opacity(0.6)

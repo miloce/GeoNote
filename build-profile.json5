@@ -5,13 +5,13 @@
         "name": "default",
         "type": "HarmonyOS",
         "material": {
-          "storeFile": "./cer/geonote@app.p12",
-          "storePassword": "0000001B5ECCE907E8D71AD0DFACDBC7EFEDF728666C299EC45A20F54A9386ED233A9F13ABBA4A7B3F722C",
+          "certpath": "./cer/geonoteapp.cer",
           "keyAlias": "geonote",
-          "keyPassword": "0000001B36C9E5D5CA3876EBFE8DB6213EAC7785A522404D615C51B896D85854E5C76317F350811FA61356",
-          "signAlg": "SHA256withECDSA",
+          "keyPassword": "0000001B858E09D3B19A1F9DE56D11FE419492B8E31344BAC0DB92F3D505624ECE68D968513D29271F9283",
           "profile": "./cer/geonoteappRelease.p7b",
-          "certpath": "./cer/geonoteapp.cer"
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "./cer/geonote@app.p12",
+          "storePassword": "0000001B49FD9743B11DBFABFA8A224CF147EBC9DE24D211CCE55C9DFC9AD41F5ECB3E1612FA7F4F1E409D"
         }
       }
     ],
@@ -20,7 +20,7 @@
         "name": "default",
         "signingConfig": "default",
         "targetSdkVersion": "6.0.0(20)",
-        "compatibleSdkVersion": "6.0.0(20)",
+        "compatibleSdkVersion": "5.0.0(12)",
         "runtimeOS": "HarmonyOS",
         "buildOption": {
           "strictMode": {
@@ -32,7 +32,7 @@
     ],
     "buildModeSet": [
       {
-        "name": "debug",
+        "name": "debug"
       },
       {
         "name": "release"

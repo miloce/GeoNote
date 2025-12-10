@@ -1,4 +1,12 @@
-import { screenAdapter, toPx, toPy, BreakpointSystem, BreakpointType, getCurrentBreakpoint, isCurrentLandscape } from "../utils/screenAdapter"
+import {
+  screenAdapter,
+  toPx,
+  toPy,
+  BreakpointSystem,
+  BreakpointType,
+  getCurrentBreakpoint,
+  isCurrentLandscape
+} from "../utils/screenAdapter"
 import { ColorTheme } from "../utils/colorTheme";
 import { router, display } from '@kit.ArkUI';
 import webview from '@ohos.web.webview';
@@ -32,28 +40,38 @@ export struct UserAgreement {
 
   getFontSize(base: number): number {
     const scale = this.currentBreakpoint === 'xs' ? 0.9 :
-                  this.currentBreakpoint === 'lg' ? 1.15 :
-                  this.currentBreakpoint === 'md' ? 1.1 : 1.0;
+      this.currentBreakpoint === 'lg' ? 1.15 :
+        this.currentBreakpoint === 'md' ? 1.1 : 1.0;
     return base * scale;
   }
 
   getSpacing(): number {
     switch (this.currentBreakpoint) {
-      case 'xs': return 12;
-      case 'sm': return 16;
-      case 'md': return 24;
-      case 'lg': return 32;
-      default: return 16;
+      case 'xs':
+        return 12;
+      case 'sm':
+        return 16;
+      case 'md':
+        return 24;
+      case 'lg':
+        return 32;
+      default:
+        return 16;
     }
   }
 
   getNavBarHeight(): number {
     switch (this.currentBreakpoint) {
-      case 'xs': return 90;
-      case 'sm': return 100;
-      case 'md': return 110;
-      case 'lg': return 120;
-      default: return 100;
+      case 'xs':
+        return 90;
+      case 'sm':
+        return 100;
+      case 'md':
+        return 110;
+      case 'lg':
+        return 120;
+      default:
+        return 100;
     }
   }
 
@@ -68,7 +86,9 @@ export struct UserAgreement {
         }
         .width(40)
         .height(40)
-        .onClick(() => { router.back(); })
+        .onClick(() => {
+          router.back();
+        })
 
         Text('用户协议')
           .fontSize(this.getFontSize(18))
@@ -91,6 +111,8 @@ export struct UserAgreement {
         .layoutWeight(1)
         .width('100%')
         .backgroundColor(ColorTheme.getColor('pageBackground'))
+        .darkMode(2)
+        .forceDarkAccess(true)
         .onPageEnd(() => {
           console.log('[UserAgreement] 页面加载完成');
         })

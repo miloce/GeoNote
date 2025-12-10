@@ -7,6 +7,7 @@ import { User } from '../model/UserModel';
 export class UserStorage {
   private static readonly PREFERENCES_NAME = 'user_preferences';
   private static readonly USER_KEY = 'current_user';
+  private static readonly PRIVACY_AGREED_KEY = 'privacy_agreed';
 
   /**
    * 保存用户信息
@@ -79,5 +80,36 @@ export class UserStorage {
   static async isLoggedIn(): Promise<boolean> {
     const user = await UserStorage.getUser();
     return user !== null;
+  }
+
+  /**
+   * 标记用户是否已同意隐私政策
+   */
+  static async setPrivacyAgreed(agreed: boolean): Promise<void> {
+    try {
+      const context = getContext();
+      const prefs = await preferences.getPreferences(context, UserStorage.PREFERENCES_NAME);
+      await prefs.put(UserStorage.PRIVACY_AGREED_KEY, agreed);
+      await prefs.flush();
+      console.log('[UserStorage] 已记录隐私政策同意状态:', agreed);
+    } catch (error) {
+      console.error('[UserStorage] 记录隐私政策同意状态失败:', error);
+      throw new Error(`记录隐私政策同意状态失败: ${error}`);
+    }
+  }
+
+  /**
+   * 获取用户是否已同意隐私政策
+   */
+  static async isPrivacyAgreed(): Promise<boolean> {
+    try {
+      const context = getContext();
+      const prefs = await preferences.getPreferences(context, UserStorage.PREFERENCES_NAME);
+      const agreed = await prefs.get(UserStorage.PRIVACY_AGREED_KEY, false) as boolean;
+      return !!agreed;
+    } catch (error) {
+      console.error('[UserStorage] 获取隐私政策同意状态失败:', error);
+      return false;
+    }
   }
 }

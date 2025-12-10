@@ -429,7 +429,7 @@ export struct Profile {
       .borderRadius(16)
       .margin({ bottom: 40 })
 
-      Text('GeoNote v1.0.0')
+      Text('GeoNote v1.0')
         .fontSize(this.getFontSize(11))
         .fontColor(ColorTheme.getColor('textMuted'))
         .margin({ bottom: 20 })
@@ -944,7 +944,7 @@ export struct Profile {
       // 准备导出数据
       const exportData: DiaryExportData = {
         export_time: new Date().toISOString(),
-        app_version: 'v1.0.0',
+        app_version: 'v1.0',
         total_count: diaries.length,
         diaries: diaries
       };

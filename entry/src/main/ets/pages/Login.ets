@@ -468,6 +468,9 @@ export struct Login {
       return;
     }
 
+    // 记录用户已同意隐私政策（用于后续权限申请前的判断）
+    await UserStorage.setPrivacyAgreed(true);
+
     if (this.username.trim() === '') {
       this.showToast('请输入用户名或邮箱');
       return;
@@ -551,6 +554,9 @@ export struct Login {
       this.showToast('请先同意用户协议和隐私政策');
       return;
     }
+
+    // 记录用户已同意隐私政策（用于后续权限申请前的判断）
+    await UserStorage.setPrivacyAgreed(true);
 
     try {
       this.isLogging = true;
